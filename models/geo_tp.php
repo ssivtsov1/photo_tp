@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ssivtsov
- * Date: 03.07.2017
- * Time: 9:49
- */
+// Гео-координаты подстанций
 namespace app\models;
 
 use Yii;
@@ -16,13 +11,10 @@ use yii\data\SqlDataProvider;
 
 class Geo_tp extends \yii\db\ActiveRecord
 {
-
     public static function tableName()
     {
         return 'geo_tp';
     }
-
-
    
     public function rules()
     {
@@ -31,7 +23,6 @@ class Geo_tp extends \yii\db\ActiveRecord
         ];
     }
 
-
     public function getId()
     {
         return $this->getPrimaryKey();
@@ -39,10 +30,7 @@ class Geo_tp extends \yii\db\ActiveRecord
 
     public static function getDb()
     {
-        if (isset(Yii::$app->user->identity->role))
-            return Yii::$app->get('db');
-        else
-            return Yii::$app->get('db');
+        return Yii::$app->get('db');
     }
 
 }

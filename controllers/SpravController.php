@@ -10,17 +10,10 @@ use yii\filters\VerbFilter;
 use yii\data\ActiveDataProvider;
 use app\models\LoginForm;
 use app\models\ContactForm;
-use app\models\InputDataForm;
-use app\models\Calc;
 use app\models\spr_res;
-use app\models\spr_work;
-use app\models\spr_uslug;
 use app\models\spr_tp;
 use app\models\sprav_tp;
-use app\models\sprtransp;
 use app\models\searchklient;
-use app\models\klient;
-use app\models\status_sch;
 use app\models\requerstsearch;
 
 class SpravController extends Controller
@@ -92,35 +85,16 @@ class SpravController extends Controller
             ]);
     }
 
-
 //    Удаление записей из справочника
     public function actionDelete($id,$mod)
     {   // $id  id записи
         // $mod - название модели
         if($mod=='spr_res')
         $model = spr_res::findOne($id);
-        if($mod=='sprtransp')
-        $model = sprtransp::findOne($id);
-        if($mod=='spr_work')
-        $model = spr_work::findOne($id);
-        if($mod=='sprklient')
-            $model = klient::findOne($id);
-        if($mod=='status_sch')
-            $model = status_sch::findOne($id);
-        
         $model->delete();
         
         if($mod=='spr_res')
         return $this->redirect(['sprav/sprav_res']);
-        if($mod=='sprtransp')
-        return $this->redirect(['sprav/sprav_transp']);
-        if($mod=='spr_work')
-        return $this->redirect(['sprav/sprav_work']);
-        if($mod=='sprklient')
-            return $this->redirect(['sprav/sprav_klient']);
-        if($mod=='status_sch')
-            return $this->redirect(['sprav/status_sch']);
-
     }
 
 //    Обновление записей из справочника
@@ -130,14 +104,6 @@ class SpravController extends Controller
         // $mod - название модели
         if($mod=='spr_res')
         $model = spr_res::findOne($id);
-        if($mod=='sprtransp')
-        $model = sprtransp::findOne($id);
-        if($mod=='spr_work')
-        $model = spr_work::findOne($id);
-        if($mod=='sprklient')
-            $model = klient::findOne($id);
-        if($mod=='status_sch')
-            $model = status_sch::findOne($id);
 
         if ($model->load(Yii::$app->request->post()))
         {  
@@ -147,48 +113,18 @@ class SpravController extends Controller
 
             if($mod=='spr_res')
                 return $this->redirect(['sprav/sprav_res']);
-            if($mod=='sprtransp')
-                return $this->redirect(['sprav/sprav_transp']);
-            if($mod=='spr_work')
-                return $this->redirect(['sprav/sprav_work']);
-            if($mod=='sprklient')
-                return $this->redirect(['sprav/sprav_klient']);
-            if($mod=='status_sch')
-                return $this->redirect(['sprav/status_sch']);
-            
+
         } else {
             if($mod=='spr_res')
             return $this->render('update_res', [
                 'model' => $model,
 
             ]);
-            if($mod=='spr_work')
-            return $this->render('update_work', [
-                'model' => $model,
-
-            ]);
-            if($mod=='sprtransp')
-            return $this->render('update_transp', [
-                'model' => $model,
-
-            ]);
-            if($mod=='sprklient')
-                return $this->render('update_klient', [
-                    'model' => $model,
-
-                ]);
-
-            if($mod=='status_sch')
-                return $this->render('update_status_sch', [
-                    'model' => $model,
-
-                ]);
         }
     }
 //    Срабатывает при нажатии кнопки добавления РЭСа
      public function actionCreateres()
     {
-        
         $model = new spr_res();
        
         if ($model->load(Yii::$app->request->post()))
@@ -201,92 +137,7 @@ class SpravController extends Controller
            
             return $this->render('update_res', [
                 'model' => $model]);
-
-            
         }
     }
 
-    //    Срабатывает при нажатии кнопки добавления статуса заявки
-    public function actionCreatestatus_sch()
-    {
-
-        $model = new status_sch();
-
-        if ($model->load(Yii::$app->request->post()))
-        {
-
-            if($model->save(false)) //var_dump($model->getErrors());
-                return $this->redirect(['sprav/status_sch']);
-
-        } else {
-
-            return $this->render('update_status_sch', [
-                'model' => $model]);
-
-
-        }
-    }
-    //    Срабатывает при нажатии кнопки добавления в справ. транспорта
-    public function actionCreatetransp()
-    {
-        
-        $model = new sprtransp();
-       
-        if ($model->load(Yii::$app->request->post()))
-        {  
-                       
-            if($model->save(false))
-               return $this->redirect(['sprav/sprav_transp']);
-           
-        } else {
-           
-            return $this->render('update_transp', [
-                'model' => $model]);
-
-            
-        }
-    }
-
-    //    Срабатывает при нажатии кнопки добавления в справ. видов работ
-    public function actionCreatework()
-    {
-        
-        $model = new spr_work();
-       
-        if ($model->load(Yii::$app->request->post()))
-        {  
-                       
-            if($model->save(false))
-               return $this->redirect(['sprav/sprav_work']);
-           
-        } else {
-           
-            return $this->render('update_work', [
-                'model' => $model]);
-
-            
-        }
-    }
-    //    Срабатывает при нажатии кнопки добавления в справ. контрагентов
-    public function actionCreateklient()
-    {
-
-        $model = new klient();
-
-        if ($model->load(Yii::$app->request->post()))
-        {
-
-            if($model->save(false))
-                return $this->redirect(['sprav/sprav_klient']);
-
-        } else {
-
-            return $this->render('update_klient', [
-                'model' => $model]);
-
-
-        }
-    }
-
-  
 }

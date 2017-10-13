@@ -835,18 +835,6 @@ class SiteController extends AppController  //Controller
 
     }
 
-
-      // Просмотр отказов
-    public function actionViewcancel()
-    {
-        $searchModel = new Refusal();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('viewcancel', [
-            'model' => $searchModel,'dataProvider' => $dataProvider,'searchModel' => $searchModel,
-        ]);
-    }
-
     // Подгрузка подстанций - происходит при выборе РЄСа
     public function actionGettp($id)
     {
@@ -893,7 +881,6 @@ class SiteController extends AppController  //Controller
     // Подгрузка координат подстанций 
     public function actionGet_tp($name)
     {
-
         Yii::$app->response->format = Response::FORMAT_JSON;
        
         if (Yii::$app->request->isAjax) {
@@ -914,8 +901,6 @@ class SiteController extends AppController  //Controller
 
         }
     }
-
-
     // Подгрузка подстанций - при просмотре фото(выборка только тех
 //        подстанций, где есть фотографии)
         public function actionGettp_exists($id)
@@ -946,47 +931,7 @@ class SiteController extends AppController  //Controller
     return ['oh no' => 'you are not allowed :('];
     }
 
-    // Подгрузка видов работ - происходит при вводе ИНН
-    public function actionGetklient($inn) {
-
-        Yii::$app->response->format = Response::FORMAT_JSON;
-        if (Yii::$app->request->isAjax) {
-            $iklient = klient::find()->select(['nazv','addr','okpo','regsvid','priz_nds',
-                'email','tel','person','fio_dir','contact_person'])
-                ->where('inn=:inn',[':inn' => $inn])->all();
-            if(!isset($iklient[0]->nazv)) {
-                $nazv = '';
-                $addr = '';
-                $email = '';
-                $tel = '';
-                $priz_nds = false;
-                $person = '';
-                $regsvid = '';
-                $contact_person = '';
-                $fio_dir = '';
-            }
-            else {
-                $nazv = $iklient[0]->nazv;
-                $addr = $iklient[0]->addr;
-                $email = $iklient[0]->email;
-                $tel = $iklient[0]->tel;
-                $priz_nds = $iklient[0]->priz_nds;
-                $person = $iklient[0]->person;
-                $regsvid = $iklient[0]->regsvid;
-                $fio_dir = $iklient[0]->fio_dir;
-                $contact_person = $iklient[0]->contact_person;
-            }
-            return ['success' => true, 'nazv' => $nazv,'addr' => $addr,
-                'email' => $email,'tel' => $tel,'priz_nds' => $priz_nds,
-                'person' => $person,'regsvid' => $regsvid,
-                'fio_dir' => $fio_dir,'contact_person' => $contact_person
-            ];
-
-        }
-        return ['oh no' => 'you are not allowed :('];
-    }
-
-    // Определяем расстояние по дороге от базы до объекта - происходит при нажатии на карту
+     // Определяем расстояние по дороге от базы до объекта - происходит при нажатии на карту
      public function actionGetdist($url,$origins,$destinations) {
           
     Yii::$app->response->format = Response::FORMAT_JSON;
@@ -1004,7 +949,6 @@ class SiteController extends AppController  //Controller
       
         return ['success' => true, 'output' => $output];
     }
-
     }
     
     // Определяем гео-координаты выбранного РЭСа 
