@@ -436,3 +436,16 @@ a.desc:after {
     float:left;
     margin-right: 50px;
 }
+.r_sidebar {
+    
+    /*width: 200px;*/
+    /*height:200px;*/
+    float:right;
+    /*overflow: hidden;*/
+    margin-right: 250px;
+    /*margin-top: 20px;*/
+    
+}
+.face_pict {
+    /*float:right;*/
+}

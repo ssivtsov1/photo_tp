@@ -1016,14 +1016,14 @@ class SiteController extends AppController  //Controller
         if (empty($model)) {
             $user = new User();
             $user->username = 'user8';
-            $user->email = 'g@ukr.net';
+            $user->email = 'krr@i.ua';
             $user->id_res = 8;
-            $user->setPassword('Ghbdtncndht');
+            $user->setPassword('Cjrhjdbot');
             $user->generateAuthKey();
             if ($user->save()) {
                 echo 'good';
             }
-        }
+        }  
     }
 // Выход пользователя
     public function actionLogout()

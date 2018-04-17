@@ -165,7 +165,12 @@ AppAsset::register($this);
             <? endif; ?>
         <? endif; ?>
 
-
+        <? if(!strpos(Yii::$app->request->url,'/web')): ?>
+        <div class="r_sidebar">
+            <img class="face_pict" src="./plant-growing-in-a-bulb_1232-194.jpg" alt="ЦЕК" />
+        </div>  
+        <? endif; ?>
+        
         <div class="container">
 
             <div class="page-header">
@@ -185,8 +190,12 @@ AppAsset::register($this);
             ]) ?>
             <?= $content ?>
         </div>
+        
+        
+        
     </div>
-   
+    
+    
 
     <footer class="footer">
         <div class="container">

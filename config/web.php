@@ -12,7 +12,7 @@ $config = [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             //'baseUrl' => '',
-            'cookieValidationKey' => '5gNTJRBqUBpu2yux6zL4kR_BdeF5fhlX',
+            'cookieValidationKey' => '5gNTJRBqUBpu2yux6zL4kR_BdeF5fhlW',
         ],
         'urlManager' => [
             'enablePrettyUrl' => true,
